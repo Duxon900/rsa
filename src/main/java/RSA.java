@@ -9,7 +9,7 @@ public class RSA {
   private  BigInteger n;
   private  BigInteger phi;
   private BigInteger e;
-  private final BigInteger d;
+  //private final BigInteger d;
 
   // gako publikoa (n,e)
   // gako pribatua d
@@ -28,24 +28,26 @@ public class RSA {
 
     r = new Random();
     one = new BigInteger("1");
-    p = BigInteger.probablePrime(256, r);
-    q = BigInteger.probablePrime(256, r);
+//    p = BigInteger.probablePrime(256, r);
+//    q = BigInteger.probablePrime(256, r);
 
-    n = p.multiply(q); // n = modulua
+//    n = p.multiply(q); // n = modulua
+
+    n=new BigInteger("102282016990194715907376754685405290320613063451593543790128550772762982262881");
 
     // (Totient funtzioa) kalkulatu
-    phi = p.subtract(one).multiply( q.subtract(one));
+//    phi = p.subtract(one).multiply( q.subtract(one));
 
     // System.out.println(phi);
 
-    e = new BigInteger(phi.bitLength(), r);
+    //e = new BigInteger(phi.bitLength(), r);
 
-    while (e.compareTo(one) <= 0 || !phi.gcd(e).equals(one) || e.compareTo(phi) >= 0) {
-      e = new BigInteger(phi.bitLength() - 1, r);
-    }
+//    while (e.compareTo(one) <= 0 || !phi.gcd(e).equals(one) || e.compareTo(phi) >= 0) {
+//      e = new BigInteger(phi.bitLength() - 1, r);
+//    }
 
     // d*e mod phi =1   e eta phi jakinda, nola kalkulatu d?
-    d = e.modInverse(phi);
+//    d = e.modInverse(phi);
 
     // check d*e mod phi = 1
     // System.out.println("Check: " + d.multiply(e).mod(phi));
@@ -64,15 +66,25 @@ public class RSA {
   public static void main(String[] args) {
 
     RSA rsa = new RSA();
-    String mezua = "HELLOWORLD";
+    String mezua = "������Eqo�[g~.�PU��\\��g@(6v";
     // HELLOWORLD => 72697676798779827668
 
-    System.out.println(rsa.zifratu(mezua));
-    System.out.println( rsa.deszifratu( rsa.zifratu(mezua)) );
+    rsa.n=new BigInteger("102282016990194715907376754685405290320613063451593543790128550772762982262881");
+    BigInteger m= new BigInteger("65");
+    rsa.e=new BigInteger("65537");
+
+
+
+
+    //System.out.println(m.modPow(rsa.e,rsa.n));
+
+    rsa.indarGorria();
+//    System.out.println(rsa.zifratu(mezua));
+//    System.out.println( rsa.deszifratu( rsa.zifratu(mezua)) );
 
 
   }
-
+/*
   private BigInteger zifratu(String mezua) {
 
     // k = c(m) = m^e mod n    (zifratu)
@@ -85,5 +97,26 @@ public class RSA {
   private BigInteger deszifratu( BigInteger ciphertext) {
     return ciphertext.modPow(d, n);
   }
+*/
+
+  private void indarGorria(){
+    n=new BigInteger("102282016990194715907376754685405290320613063451593543790128550772762982262881");
+    BigInteger f=new BigInteger("65537");
+    BigInteger kont=new BigInteger("102282016990194715907376754685405290320613063451593543790128550772762982262882");
+    BigInteger bat= new BigInteger("1");
+
+    BigInteger k=new BigInteger("79780540490711996095149241342253785675667942994027936597470862342579827172194");
+
+    System.out.println("hola");
+
+    while (kont.compareTo(f)==1){
+      if(f.gcd(kont)==bat){
+        System.out.println(kont);
+      }
+      else kont.subtract(bat);
+    }
+    System.out.println(kont);
+  }
+
 
 }
