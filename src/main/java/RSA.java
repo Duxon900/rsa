@@ -104,18 +104,23 @@ public class RSA {
     BigInteger f=new BigInteger("65537");
     BigInteger kont=new BigInteger("102282016990194715907376754685405290320613063451593543790128550772762982262882");
     BigInteger bat= new BigInteger("1");
+    BigInteger emaitza=new BigInteger("65");
 
     BigInteger k=new BigInteger("79780540490711996095149241342253785675667942994027936597470862342579827172194");
 
     System.out.println("hola");
 
     while (kont.compareTo(f)==1){
-      if(f.gcd(kont)==bat){
-        System.out.println(kont);
+      if(kont.gcd(f).equals(bat) && kont.isProbablePrime(5) && k.modPow(kont, n).equals(emaitza)){
+
+        	System.out.println(kont);
+       
       }
-      else kont.subtract(bat);
+      kont=kont.subtract(bat);
+      
+      //System.out.println(kont);
+
     }
-    System.out.println(kont);
   }
 
 
